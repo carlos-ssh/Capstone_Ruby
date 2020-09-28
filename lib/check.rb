@@ -17,7 +17,14 @@ class CheckError
     check_tag_error(/\[/, /\]/, '[', ']', 'Square_Brackets')
     check_tag_error(/\{/, /\}/, '{', '}', 'Curly_Brackets')  
   end
+  
+  def check_trailing_spaces
+    @checker.file_lines.each_with_index do |str_val, index|
+      if str_val[-2] == ' ' && !str_val.strip.empty?
+        @errors << "line: #{index + 1}: #{str_val.size - 1}: Error: Whitespace detected."
+        + " '#{str_val.gsub(/\s*$/, '_')}'"
+      end
+    end
+  end
 
 
-
-end
