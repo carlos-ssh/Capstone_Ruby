@@ -9,3 +9,13 @@ check.tag_error
 check.trailing_spaces
 check.indentation
 
+if check.errors.empty? && check.checker.err_msg.empty?
+  puts 'No errors found'
+else
+  check.errors.uniq.each do |err|
+    puts "#{check.checker.file_path.colorize(:red)} : #{err.colorize(:red)}"
+  end
+end
+
+puts check.checker.err_msg if check.checker.file_lines.empty?
+
