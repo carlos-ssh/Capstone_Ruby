@@ -41,3 +41,12 @@ class CheckError
     log_error("Lint/Syntax Error: Unexpected 'end'") if status.eql?(-1)
   end
 
+  def empty_line_error
+    @checker.file_lines.each_with_index do |str_val, indx|
+      check_class_empty_line(str_val, indx)
+      check_do_empty_line(str_val, indx)
+      check_end_empty_line(str_val, indx)
+      check_def_empty_line(str_val, indx)
+    end
+  end
+
