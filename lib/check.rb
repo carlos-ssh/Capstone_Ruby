@@ -49,4 +49,23 @@ class CheckError
       check_def_empty_line(str_val, indx)
     end
   end
+  
+  # rubocop: disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 
+  def check_identation
+    msg = "Identation Error: Use two spaces or more"
+    cur_val = 0
+    indent_val = 0
+
+    @checker.file_lines.each_with_index do |str_val, indx|
+      strip_line = str_val.strip.split(' ')
+      exp_val = cur_val * 2
+
+      res_words = %w[begin case module unless until elsif def if class]
+
+      next unless !str_val.strip.empty? || !strip_line.first.eql?('#')
+      
+      indent_val += 1 if res_word.include?(strip_line.first) || strip_line.include?('do')
+      indent_val += 1 if str_val.strip == 'end'
+    end
+  end
