@@ -16,7 +16,7 @@ describe CheckError do
       expect(checker.errors[0]).to eql("Lint/Syntax: Missing 'end'")
     end
   end
-
+ 
   describe '#tag_error' do
     it "returns missing/unexpected tags eg '( )', '[ ]', and '{ }'" do
       checker.tag_error
@@ -31,4 +31,10 @@ describe CheckError do
     end
   end
 
+  describe '#check_trailing_spaces' do
+    it 'should return trailing space error on line 3' do
+      checker.check_trailing_spaces
+      expect(checker.errors[0]).to eql('line:3:20: Error: Trailing whitespace detected.')
+    end
+  end
 end
