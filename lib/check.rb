@@ -91,4 +91,17 @@ class CheckError
 
     # rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 
+  def check_tag_error(*args)
+    @checker.file_lines.each_with_index do |str_val, index|
+      open_p = []
+      close_p = []
+      open_p << str_val.scan(args[0])
+      close_p << str_val.scan(args[1])
+
+      status = open_p.flatten.size <=> close_p.flatten.size
+
+      log_error("Line: #{index + 1} Lint/Syntax: Unexpected/Missing Token '#{args[2]}' #{args[4]}") if status.eql?(1)
+      log_error("Line: #{index + 1} Lint/Syntax: Unexpected/Missing Token '#{args[3]}' #{args[4]}") if status.eql?(-1)
+    end
+  end
 
