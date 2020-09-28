@@ -27,4 +27,17 @@ class CheckError
     end
   end
 
+  def end_error
+    keyw_count = 0
+    end_count = 0
+
+    @checker.file_lines.each_with_index do |str_val, _index|
+      keyw_count += 1 if keywords.include?(str_val.split(' ').first) && str_val.split(' ').include?('do')
+      end_count += 1 if str_val.strip == 'end'
+    end
+
+    status = keyw_count <=> end_count
+    log_error("Lint/Syntax Error: Missing 'end'") if status.eql?(1)
+    log_error("Lint/Syntax Error: Unexpected 'end'") if status.eql?(-1)
+  end
 
