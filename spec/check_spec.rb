@@ -1,6 +1,4 @@
-# frozen_string_literal: true
-
-require_relative '../lib/checks.rb'
+require_relative '../lib/check.rb'
 
 describe CheckError do
   let(:checker) { CheckError.new('bug.rb') }
