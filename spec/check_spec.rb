@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../lib/checks.rb'
 
 describe CheckError do
@@ -16,7 +18,7 @@ describe CheckError do
       expect(checker.errors[0]).to eql("Lint/Syntax: Missing 'end'")
     end
   end
- 
+
   describe '#tag_error' do
     it "returns missing/unexpected tags eg '( )', '[ ]', and '{ }'" do
       checker.tag_error
