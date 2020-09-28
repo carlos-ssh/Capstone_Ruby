@@ -67,5 +67,28 @@ class CheckError
       
       indent_val += 1 if res_word.include?(strip_line.first) || strip_line.include?('do')
       indent_val += 1 if str_val.strip == 'end'
+      
+      next if str_val.strip.empty?
+
+      indent_error(str_val, indx, exp_val, msg)
+      cur_val = indent_val
     end
   end
+
+  private
+
+  def indent_error(str_val, indx, exp_val, msg)
+    strip_line = str_val.strip.split(' ')
+    empty = str_val.match(/^\s*\s*/)
+    end_chk = emp[0].size.eql?(exp_val.zero? ? 0 : exp_val - 2)
+
+    if str_val.strip.eql?('end') || strip_line.first == 'elsif' || strip_line.first == 'when'
+      log_error("line:#{indx + 1} #{msg}") unless end_chk
+    elsif !emp[0].size.eql?(exp_val)
+      log_error("line:#{indx + 1} #{msg}")
+    end
+  end
+
+    # rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
+
+
