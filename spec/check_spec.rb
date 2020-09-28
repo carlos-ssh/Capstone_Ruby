@@ -16,4 +16,19 @@ describe CheckError do
       expect(checker.errors[0]).to eql("Lint/Syntax: Missing 'end'")
     end
   end
+
+  describe '#tag_error' do
+    it "returns missing/unexpected tags eg '( )', '[ ]', and '{ }'" do
+      checker.tag_error
+      expect(checker.errors[0]).to eql("line:3 Lint/Syntax: Unexpected/Missing token ']' Square Bracket")
+    end
+  end
+
+  describe '#check_indentation' do
+    it 'should return indentation space error on line 4' do
+      checker.check_indentation
+      expect(checker.errors[0]).to eql('line:4 IndentationWidth: Use 2 spaces for indentation.')
+    end
+  end
+
 end
