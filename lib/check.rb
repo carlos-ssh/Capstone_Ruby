@@ -111,3 +111,19 @@ class CheckError
 
     log_error("Line #{indx + 2} #{msg}") if @checker.file_lines[indx + 1].strip.empty?
   end
+
+  def check_def_empty_line(str_val, indx)
+    msg1 = 'Empty line detected at method body beginning'
+    msg2 = 'Use empty lines between methods'
+
+    return unless str_val.strip.split(' ').first.eql?('def')
+
+    log_error("line:#{indx + 2} #{msg1}") if @checker.file_lines[indx + 1].strip.empty?
+    log_error("line:#{indx + 1} #{msg2}") if @checker.file_lines[indx - 1].strip.split(' ').first.eql?('end')
+  end
+
+  def check_end_empty_line(str_val, indx)
+    return unless str_val.strip.split(' ').first.eql?('end')
+
+    log_error("line:#{indx} Extra empty line detected at block body end") if @checker.file_lines[indx - 1].strip.empty?
+  end
