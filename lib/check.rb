@@ -105,3 +105,9 @@ class CheckError
     end
   end
 
+  def check_class_empty_line(str_val, indx)
+    msg = "Unexpected empty line inside class"
+    return unless str_val.strip.split(' ').first.eql?('class')
+
+    log_error("Line #{indx + 2} #{msg}") if @checker.file_lines[indx + 1].strip.empty?
+  end
