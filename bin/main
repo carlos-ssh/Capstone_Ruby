@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require_relative "../lib/check.rb"
+
+check = CheckError.new(ARGV.first)
+check.empty_line_error
+check.end_error
+check.tag_error
+check.trailing_spaces
+check.indentation
+
