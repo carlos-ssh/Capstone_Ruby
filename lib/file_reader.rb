@@ -8,10 +8,9 @@ class FileReader
     begin
       @file_lines = File.readlines(@file_path)
       @file_lines_count = @file_lines.size
-    rescue
+    rescue StandardError => e
       @file_lines = []
       @err_msg = "PLEASE CHECK YOUR PATH AND FILE!\n".colorize(:light_red) + e.to_s.colorize(:red)
     end
   end
 end
-

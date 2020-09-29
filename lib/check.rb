@@ -15,9 +15,9 @@ class CheckError
   def tag_error
     check_tag_error(/\(/, /\)/, '(', ')', 'Parentheses')
     check_tag_error(/\[/, /\]/, '[', ']', 'Square_Brackets')
-    check_tag_error(/\{/, /\}/, '{', '}', 'Curly_Brackets')  
+    check_tag_error(/\{/, /\}/, '{', '}', 'Curly_Brackets')
   end
-  
+
   def check_trailing_spaces
     @checker.file_lines.each_with_index do |str_val, index|
       if str_val[-2] == ' ' && !str_val.strip.empty?
@@ -32,7 +32,7 @@ class CheckError
     end_count = 0
 
     @checker.file_lines.each_with_index do |str_val, _index|
-      keyw_count += 1 if keywords.include?(str_val.split(' ').first) && str_val.split(' ').include?('do')
+      keyw_count += 1 if @keywords.include?(str_val.split(' ').first) && str_val.split(' ').include?('do')
       end_count += 1 if str_val.strip == 'end'
     end
 
@@ -49,11 +49,11 @@ class CheckError
       check_def_empty_line(str_val, indx)
     end
   end
-  
-  # rubocop: disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
+
+  # rubocop: disable Metrics/CyclomaticComplexity
 
   def check_identation
-    msg = "Identation Error: Use two spaces or more"
+    msg = 'Identation Error: Use two spaces or more'
     cur_val = 0
     indent_val = 0
 
@@ -61,13 +61,13 @@ class CheckError
       strip_line = str_val.strip.split(' ')
       exp_val = cur_val * 2
 
-      res_words = %w[begin case module unless until elsif def if class]
+      res_word = %w[begin case module unless until elsif def if class]
 
       next unless !str_val.strip.empty? || !strip_line.first.eql?('#')
-      
+
       indent_val += 1 if res_word.include?(strip_line.first) || strip_line.include?('do')
       indent_val += 1 if str_val.strip == 'end'
-      
+
       next if str_val.strip.empty?
 
       indent_error(str_val, indx, exp_val, msg)
@@ -79,7 +79,7 @@ class CheckError
 
   def indent_error(str_val, indx, exp_val, msg)
     strip_line = str_val.strip.split(' ')
-    empty = str_val.match(/^\s*\s*/)
+    emp = str_val.match(/^\s*\s*/)
     end_chk = emp[0].size.eql?(exp_val.zero? ? 0 : exp_val - 2)
 
     if str_val.strip.eql?('end') || strip_line.first == 'elsif' || strip_line.first == 'when'
@@ -89,7 +89,7 @@ class CheckError
     end
   end
 
-    # rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
+  # rubocop: enable Metrics/CyclomaticComplexity
 
   def check_tag_error(*args)
     @checker.file_lines.each_with_index do |str_val, index|
@@ -106,7 +106,7 @@ class CheckError
   end
 
   def check_class_empty_line(str_val, indx)
-    msg = "Unexpected empty line inside class"
+    msg = 'Unexpected empty line inside class'
     return unless str_val.strip.split(' ').first.eql?('class')
 
     log_error("Line #{indx + 2} #{msg}") if @checker.file_lines[indx + 1].strip.empty?
