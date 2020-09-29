@@ -86,8 +86,6 @@ class CheckError
     end
   end
 
-  # rubocop: enable Metrics/CyclomaticComplexity
-
   def check_tag_error(*args)
     @checker.file_lines.each_with_index do |str_val, index|
       open_p = []
