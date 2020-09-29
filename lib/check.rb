@@ -74,8 +74,7 @@ class CheckError
 
   private
 
-  # Metrics/MethodLength: Method has too many lines. [13/10]
-  # rubocop: enable Metrics/CyclomaticComplexity
+  # rubocop: disable Metrics/CyclomaticComplexity
 
   def indent_error(str_val, indx, exp_val, msg)
     strip_line = str_val.strip.split(' ')
