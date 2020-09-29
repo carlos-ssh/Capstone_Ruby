@@ -48,7 +48,7 @@ class CheckError
     end
   end
 
-  # rubocop: disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
+  # rubocop: disable Metrics/CyclomaticComplexity
 
   def check_indentation
     msg = 'IndentationWidth: Use 2 spaces for indentation.'
@@ -86,7 +86,7 @@ class CheckError
     end
   end
 
-  # rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
+  # rubocop: enable Metrics/CyclomaticComplexity
 
   def check_tag_error(*args)
     @checker.file_lines.each_with_index do |str_val, index|
