@@ -1,3 +1,4 @@
+# Metrics/MethodLength: Method has too many lines. [13/10]
 require 'colorize'
 require 'strscan'
 require_relative 'file_reader.rb'
