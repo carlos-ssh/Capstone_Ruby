@@ -1,4 +1,5 @@
-# rubocop: disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+# rubocop: disable Metrics/CyclomaticComplexity
+# rubocop: disable
 require 'colorize'
 require 'strscan'
 require_relative 'file_reader.rb'
@@ -86,6 +87,9 @@ class CheckError
     end
   end
 
+  # rubocop: enable Metrics/CyclomaticComplexity
+  # rubocop:enable
+
   def check_tag_error(*args)
     @checker.file_lines.each_with_index do |str_val, index|
       open_p = []
@@ -134,4 +138,3 @@ class CheckError
     @errors << error_msg
   end
 end
-# rubocop: enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
