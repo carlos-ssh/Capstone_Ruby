@@ -54,7 +54,7 @@ class CheckError
     cur_val = 0
     indent_val = 0
 
-    @checker.file_lines.each_with_index do |str_val, _indx|
+    @checker.file_lines.each_with_index do |str_val, indx|
       res_word = %w[class def if elsif until module unless begin case]
       str_val = str_val.strip
       strip_line = str_val.split(' ')
