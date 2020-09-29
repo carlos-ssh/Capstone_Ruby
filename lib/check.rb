@@ -1,4 +1,4 @@
-# rubocop: disable Metrics/CyclomaticComplexity
+# rubocop: disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 require 'colorize'
 require 'strscan'
 require_relative 'file_reader.rb'
@@ -134,4 +134,4 @@ class CheckError
     @errors << error_msg
   end
 end
-# rubocop: enable Metrics/CyclomaticComplexity
+# rubocop: enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
