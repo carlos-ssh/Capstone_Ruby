@@ -1,4 +1,3 @@
-# Metrics/MethodLength: Method has too many lines. [13/10]
 require 'colorize'
 require 'strscan'
 require_relative 'file_reader.rb'
@@ -75,6 +74,9 @@ class CheckError
 
   private
 
+  # Metrics/MethodLength: Method has too many lines. [13/10]
+  # rubocop: enable Metrics/CyclomaticComplexity
+
   def indent_error(str_val, indx, exp_val, msg)
     strip_line = str_val.strip.split(' ')
     emp = str_val.match(/^\s*\s*/)
@@ -86,8 +88,6 @@ class CheckError
       log_error("line:#{indx + 1} #{msg}")
     end
   end
-
-  # rubocop: enable Metrics/CyclomaticComplexity
 
   def check_tag_error(*args)
     @checker.file_lines.each_with_index do |str_val, index|
