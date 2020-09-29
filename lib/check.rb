@@ -48,8 +48,6 @@ class CheckError
     end
   end
 
-  # rubocop: disable Metrics/CyclomaticComplexity
-
   def check_indentation
     msg = 'IndentationWidth: Use 2 spaces for indentation.'
     cur_val = 0
@@ -74,7 +72,7 @@ class CheckError
 
   private
 
-  def indent_err(indent_err)
+  def indent_err(str_val, indx, exp_val, msg)
     strip_line = str_val.strip.split(' ')
     emp = str_val.match(/^\s*\s*/)
     end_chk = emp[0].size.eql?(exp_val.zero? ? 0 : exp_val - 2)
@@ -85,7 +83,7 @@ class CheckError
       log_error("line:#{indx + 1} #{msg}")
     end
   end
-  
+
   def check_tag_error(*args)
     @checker.file_lines.each_with_index do |str_val, index|
       open_p = []
