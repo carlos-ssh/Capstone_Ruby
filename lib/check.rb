@@ -1,5 +1,3 @@
-# rubocop: disable Metrics/CyclomaticComplexity
-# rubocop: disable
 require 'colorize'
 require 'strscan'
 require_relative 'file_reader.rb'
@@ -49,6 +47,7 @@ class CheckError
       check_do_empty_line(str_val, indx)
     end
   end
+  # rubocop: disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 
   def check_indentation
     msg = 'Indentation Width: Use 2 spaces for indentation.'
@@ -87,8 +86,7 @@ class CheckError
     end
   end
 
-  # rubocop: enable Metrics/CyclomaticComplexity
-  # rubocop:enable
+  # rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 
   def check_tag_error(*args)
     @checker.file_lines.each_with_index do |str_val, index|
