@@ -85,7 +85,7 @@ class CheckError
       log_error("line:#{indx + 1} #{msg}")
     end
   end
-
+  
   def check_tag_error(*args)
     @checker.file_lines.each_with_index do |str_val, index|
       open_p = []
