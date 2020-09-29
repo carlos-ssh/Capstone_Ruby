@@ -67,7 +67,7 @@ class CheckError
 
       next if str_val.strip.empty?
 
-      indent_error(str_val, indx, exp_val, msg)
+      indent_err(str_val, indx, exp_val, msg)
       cur_val = indent_val
     end
   end
@@ -76,7 +76,7 @@ class CheckError
 
   # rubocop: enable Metrics/CyclomaticComplexity
 
-  def indent_error(str_val, indx, exp_val, msg)
+  def indent_err(str_val, indx, exp_val, msg)
     strip_line = str_val.strip.split(' ')
     emp = str_val.match(/^\s*\s*/)
     end_chk = emp[0].size.eql?(exp_val.zero? ? 0 : exp_val - 2)
