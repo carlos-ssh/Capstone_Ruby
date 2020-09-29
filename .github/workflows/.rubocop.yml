@@ -1,3 +1,9 @@
+# .rubocop.yml
+
+require:
+  - rubocop-performance
+  - rubocop-rails
+
 AllCops:
   Exclude:
     - "Guardfile"
