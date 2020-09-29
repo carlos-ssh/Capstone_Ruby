@@ -1,14 +1,10 @@
 # .rubocop.yml
 
-require:
-  - rubocop-performance
-  - rubocop-rails
-
 AllCops:
   Exclude:
     - "Guardfile"
     - "Rakefile"
-    - "bug.rb"
+    - "./bugs/bug.rb"
 
   DisplayCopNames: true
 
