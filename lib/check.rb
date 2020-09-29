@@ -74,8 +74,6 @@ class CheckError
 
   private
 
-  # rubocop: enable Metrics/CyclomaticComplexity
-
   def indent_err(str_val, indx, exp_val, msg)
     strip_line = str_val.strip.split(' ')
     emp = str_val.match(/^\s*\s*/)
@@ -87,6 +85,8 @@ class CheckError
       log_error("line:#{indx + 1} #{msg}")
     end
   end
+
+  # rubocop: enable Metrics/CyclomaticComplexity
 
   def check_tag_error(*args)
     @checker.file_lines.each_with_index do |str_val, index|
