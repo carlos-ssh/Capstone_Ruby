@@ -10,7 +10,7 @@ check.end_error
 check.empty_line_error
 
 if check.errors.empty? && check.checker.err_msg.empty?
-  puts 'No errors found'
+  puts "No errors found \n Waa-Hoooo!".colorize(:green)
 else
   check.errors.uniq.each do |err|
     puts "#{check.checker.file_path.colorize(:red)} : #{err.colorize(:red)}"
