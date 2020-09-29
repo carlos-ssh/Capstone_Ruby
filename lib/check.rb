@@ -74,7 +74,7 @@ class CheckError
 
   private
 
-  # rubocop: disable Metrics/CyclomaticComplexity
+  # rubocop: enable Metrics/CyclomaticComplexity
 
   def indent_error(str_val, indx, exp_val, msg)
     strip_line = str_val.strip.split(' ')
