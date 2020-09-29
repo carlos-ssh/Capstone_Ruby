@@ -48,24 +48,23 @@ class CheckError
     end
   end
 
-  # rubocop: disable Metrics/CyclomaticComplexity
-
   def check_indentation
     msg = 'IndentationWidth: Use 2 spaces for indentation.'
     cur_val = 0
     indent_val = 0
 
     @checker.file_lines.each_with_index do |str_val, indx|
-      strip_line = str_val.strip.split(' ')
+      str_val = str_val.strip
+      strip_line = str_val.split(' ')
       exp_val = cur_val * 2
       res_word = %w[class def if elsif until module unless begin case]
 
-      next unless !str_val.strip.empty? || !strip_line.first.eql?('#')
+      next unless !str_val.empty? || !strip_line.first.eql?('#')
 
       indent_val += 1 if res_word.include?(strip_line.first) || strip_line.include?('do')
-      indent_val -= 1 if str_val.strip == 'end'
+      indent_val -= 1 if str_val == 'end'
 
-      next if str_val.strip.empty?
+      next unless str_val.empty?
 
       indent_error(str_val, indx, exp_val, msg)
       cur_val = indent_val
@@ -75,18 +74,17 @@ class CheckError
   private
 
   def indent_error(str_val, indx, exp_val, msg)
-    strip_line = str_val.strip.split(' ')
+    str_val = str_val.strip
+    strip_line = str_val.split(' ').first
     emp = str_val.match(/^\s*\s*/)
     end_chk = emp[0].size.eql?(exp_val.zero? ? 0 : exp_val - 2)
 
-    if str_val.strip.eql?('end') || strip_line.first == 'elsif' || strip_line.first == 'when'
-      log_error("line:#{indx + 1} #{msg}") unless end_chk
+    if str_val.eql?('end') || strip_line == 'elsif' || strip_line == 'when' || !end_chk
+      log_error("line:#{indx + 1} #{msg}")
     elsif !emp[0].size.eql?(exp_val)
       log_error("line:#{indx + 1} #{msg}")
     end
   end
-
-  # rubocop: enable Metrics/PerceivedComplexity
 
   def check_tag_error(*args)
     @checker.file_lines.each_with_index do |str_val, index|

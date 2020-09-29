@@ -8,5 +8,5 @@ class Hello
     lines.each do |x|
        puts x
     end
-    
+
 end
